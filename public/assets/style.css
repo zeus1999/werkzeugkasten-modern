@@ -1,0 +1,42 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+
+	background: rgba(55,107,139,1);
+	background: -moz-radial-gradient(center, ellipse cover, rgba(55,107,139,1) 0%, rgba(45,87,114,1) 51%, rgba(28,53,69,1) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(55,107,139,1)), color-stop(51%, rgba(45,87,114,1)), color-stop(100%, rgba(28,53,69,1)));
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(55,107,139,1) 0%, rgba(45,87,114,1) 51%, rgba(28,53,69,1) 100%);
+	background: -o-radial-gradient(center, ellipse cover, rgba(55,107,139,1) 0%, rgba(45,87,114,1) 51%, rgba(28,53,69,1) 100%);
+	background: -ms-radial-gradient(center, ellipse cover, rgba(55,107,139,1) 0%, rgba(45,87,114,1) 51%, rgba(28,53,69,1) 100%);
+	background: radial-gradient(ellipse at center, rgba(55,107,139,1) 0%, rgba(45,87,114,1) 51%, rgba(28,53,69,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#376b8b', endColorstr='#1c3545', GradientType=1 );
+
+	color: white;
+    font-family: "Roboto Light";  
+
+}
+
+body {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 0);
+    background-size: 96px 96px;
+    background-position: -16px -16px;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+svg {
+	-webkit-animation:spin 30s linear infinite;
+    -moz-animation:spin 30s linear infinite;
+    animation:spin 30s linear infinite;
+}
+
+#el {
+	position: absolute;
+	top: Calc(50%);
+	left: Calc(50%);
+	transform: translate(-50%,-50%);
+}
