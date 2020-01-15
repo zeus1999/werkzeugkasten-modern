@@ -40,3 +40,56 @@ svg {
 	left: Calc(50%);
 	transform: translate(-50%,-50%);
 }
+
+#abbr_search {
+	left: 32px;
+	top: 32px;
+	width: 50%;
+}
+
+#clock {
+	right: 32px;
+	top: 32px;
+}
+
+.window {
+	position: absolute;
+	min-width: 25vw;
+	max-width: 50vw;
+	border: 1px white solid;
+	padding-bottom: 16px;
+	background-color: rgba(49, 95, 123, 0.5);
+}
+
+.window .title {
+	text-transform: uppercase;
+	color: #2ecc71;
+}
+
+.line {
+	height: 24px;
+	width: 100%;
+	padding: 16px;
+}
+
+.line.free {
+	height: inherit;
+}
+
+#abbr {
+	background-color: transparent;
+	border: 1px white solid;
+	width: Calc(100% - 32px);
+	color: white;
+	outline: none;
+}
+
+table {
+	border: 1px white solid;
+	width: Calc(100% - 32px);
+	border-collapse: collapse;
+}
+
+table > tr:nth-child(1) {
+	border-bottom: 1px white solid;
+}
