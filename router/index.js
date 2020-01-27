@@ -8,28 +8,33 @@ let abbrJson = [];
 
 (async () => {
     
-    let manual = await csv({ delimiter: ";" }).fromFile(path.join(__dirname, "../abbs.csv"));
+    let manual = await csv({ delimiter: ";" }).fromFile(path.join(__dirname, "../data/abbs.csv"));
     manual.forEach(function(value){
         abbrJson.push({ abbr: value.abbr, meaning: value.meaning, type: "myCsv" });
-    }); 
+    });
 
-    let iso31661 = await csv({ delimiter: "," }).fromFile(path.join(__dirname, "../iso-3166-1.csv"));
+    let lufthansa = await csv({ delimiter: ";" }).fromFile(path.join(__dirname, "../data/lufthansa.csv"));
+    lufthansa.forEach(function(value){
+        abbrJson.push({ abbr: value.abbr, meaning: value.meaning, type: "Lufthansa" });
+    });
+
+    let iso31661 = await csv({ delimiter: "," }).fromFile(path.join(__dirname, "../data/iso-3166-1.csv"));
     iso31661.forEach(function(value){
         abbrJson.push({ abbr: value.alpha2, meaning: value.country, type: "ISO 3166-1 Data (Alpha 2)" });
         abbrJson.push({ abbr: value.alpha3, meaning: value.country, type: "ISO 3166-1 Data (Alpha 3)" });
     });
 
-    let iso31662 = await csv({ delimiter: "," }).fromFile(path.join(__dirname, "../iso-3166-2.csv"));
+    let iso31662 = await csv({ delimiter: "," }).fromFile(path.join(__dirname, "../data/iso-3166-2.csv"));
     iso31662.forEach(function(value){
         abbrJson.push({ abbr: value.code, meaning: value.name + " (" + value.countryName + ")", type: "ISO 3166-2 Data" });
     });
 
-    let iso4217 = await csv({ delimiter: "," }).fromFile(path.join(__dirname, "../iso-4217.csv"));
+    let iso4217 = await csv({ delimiter: "," }).fromFile(path.join(__dirname, "../data/iso-4217.csv"));
     iso4217.forEach(function(value){
         abbrJson.push({ abbr: value.code, meaning: value.currency, type: "ISO 4217 Data" });
     });
     
-    let airports = await csv({ delimiter: ",", quote: "\"" }).fromFile(path.join(__dirname, "../airports.csv"));
+    let airports = await csv({ delimiter: ",", quote: "\"" }).fromFile(path.join(__dirname, "../data/airports.csv"));
     airports.forEach(function(value){
         abbrJson.push({ abbr: value.iata_code, meaning: value.name, type: "Airport Data" });
     });
