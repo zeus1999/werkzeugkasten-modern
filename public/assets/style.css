@@ -48,58 +48,110 @@ svg {
 	transform: translate(-50%,-50%);
 }
 
-#abbr_search {
-	left: 32px;
-	top: 32px;
-	width: 50%;
-}
-
-#clock {
-	right: 32px;
-	top: 32px;
-}
-
-.window {
+#page_container {
 	position: absolute;
-	min-width: 25vw;
-	max-width: 50vw;
-	border: 1px white solid;
-	padding-bottom: 16px;
-	background-color: rgba(49, 95, 123, 0.5);
-	max-height: 50vh;
-	overflow-y: auto;
-	overflow-x: hidden;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
-.window .title {
-	text-transform: uppercase;
-	color: #2ecc71;
+#program {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 250px;
 }
 
-.line {
-	height: 24px;
-	width: 100%;
+#keyboard {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 200px;
+}
+
+.key {
+	display: inline-block;
+	height: 45px;
+	-webkit-box-shadow:inset 0px 0px 0px 1px white;
+    -moz-box-shadow:inset 0px 0px 0px 1px white;
+    box-shadow:inset 0px 0px 0px 1px white;
+	line-height: 45px;
+
+}
+
+.key span {
+	line-height: 45px;
+}
+
+.key.x1 {
+	width: 88px;
+}
+
+.key.x2 {
+	width: 176px;
+}
+
+.key.x3 {
+	width: 256px;
+}
+
+.key.x4 {
+	width: 350px;
+}
+
+.key.x6 {
+	width: 528px;
+}
+
+.keyboard-line {	
+	height: 45px;
+	text-align: center;
+}
+
+
+.keyboard-line:not(:first-child) {
+	margin-top: 6px;
+}
+
+.key:not(:first-child) {
+	margin-left: 6px;
+}
+
+.left {
+	width: 40%;
 	padding: 16px;
+	float: left;
 }
 
-.line.free {
-	height: inherit;
+.right {
+	float: right;
+	overflow: auto;
+	max-height: 100%;
+	width: 40%;
+	margin-top: 16px;
+	margin-right: 16px;
 }
 
-#abbr {
-	background-color: transparent;
-	border: 1px white solid;
-	width: Calc(100% - 32px);
-	color: white;
-	outline: none;
+tbody {
+    display:block;
+    height: 250px;
+    overflow:auto;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+thead {
+    width: calc( 100% - 1em )
 }
 
 table {
 	border: 1px white solid;
-	width: Calc(100% - 32px);
-	border-collapse: collapse;
 }
-
-table > tr:nth-child(1) {
+thead {
 	border-bottom: 1px white solid;
 }

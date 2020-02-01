@@ -1,65 +1,86 @@
-window.onload = function(){
+var app = angular.module("werkzeugkasten", []);
 
-    let abbr = document.getElementById("abbr");
-    let abbr_result = document.getElementById("abbr_result");
-    let abbr_result_parent = abbr_result.parentElement;
-    abbr.addEventListener("keypress", function(e){
-        if(e.key === "Enter"){
 
-            let request = new Request("http://localhost:6/abbr", { method: "POST", body: '{"abbr": "' + abbr.value + '"}', headers: {
-                'Content-Type':'application/json'
-            }});
+app.controller("programCtrl", function($scope, $http){
 
-            fetch(request).then(response => {
-                if (response.status === 200){                    
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong on api server!');
-                }
-            }).then(response => {
-                
-                abbr_result.innerHTML = "";
+    $scope.search = "";
+    $scope.$on("key", function(a, b){
 
-                
-                let tr = document.createElement("tr");
-                let td1 = document.createElement("td");
-                td1.innerHTML = "abbr";
-                let td2 = document.createElement("td");
-                td2.innerHTML = "meaning";
-                let td3 = document.createElement("td");
-                td3.innerHTML = "data source";
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
+        if(b == "space"){
+            $scope.search += " ";
+        } else if(b == "backspace"){
+            let c = $scope.search.split("");
+            c.pop();
+            $scope.search = c.join("");
+        } else if(b == "enter"){
 
-                abbr_result.appendChild(tr);
-
-                for(let i = 0; i < response.length; i++){
-
-                    let tr = document.createElement("tr");
-                    let td1 = document.createElement("td");
-                    let td2 = document.createElement("td");
-                    let td3 = document.createElement("td");
-
-                    td1.innerHTML = response[i].abbr;
-                    td2.innerHTML = response[i].meaning;
-                    td3.innerHTML = response[i].type;
-
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                    tr.appendChild(td3);
-
-                    abbr_result.appendChild(tr);
-
-                }
-
-                abbr_result_parent.style.display = "inherit";
-                
-            }).catch(error => {
-                console.error(error);
+            $http({
+                url: 'http://192.168.178.45:6/search',
+                method: "POST",
+                data: { 'message' : $scope.search }
+            })
+            .then(function(response) {
+                $scope.result = response.data;
+            }, 
+            function(response) { // optional
+                    // failed
             });
+        
 
-
+        } else {
+            $scope.search += b;
         }
     });
-}
+
+});
+
+app.controller("keyboard", function($scope, $rootScope){
+
+    $scope.keys = [
+        [
+            { length: 1, value: "q" },
+            { length: 1, value: "w" },
+            { length: 1, value: "e" },
+            { length: 1, value: "r" },
+            { length: 1, value: "t" },
+            { length: 1, value: "z" },
+            { length: 1, value: "u" },
+            { length: 1, value: "i" },
+            { length: 1, value: "o" },
+            { length: 1, value: "p" },
+            { length: 1, value: "ü" },
+        ],
+        [
+            { length: 1, value: "a" },
+            { length: 1, value: "s" },
+            { length: 1, value: "d" },
+            { length: 1, value: "f" },
+            { length: 1, value: "g" },
+            { length: 1, value: "h" },
+            { length: 1, value: "j" },
+            { length: 1, value: "k" },
+            { length: 1, value: "l" },
+            { length: 1, value: "ö" },
+            { length: 1, value: "ä" },
+        ],
+        [
+            { length: 1, value: "y" },
+            { length: 1, value: "x" },
+            { length: 1, value: "c" },
+            { length: 1, value: "v" },
+            { length: 1, value: "b" },
+            { length: 1, value: "n" },
+            { length: 1, value: "m" },
+            { length: 3, value: "backspace" }
+        ],
+        [
+            { length: 6, value: "space" },
+            { length: 4, value: "enter" }
+        ]
+    ];
+
+    $scope.click = function(a){
+        $rootScope.$broadcast("key", a);
+    }
+
+})

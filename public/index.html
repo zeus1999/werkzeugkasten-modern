@@ -2,32 +2,63 @@
 <html>
     <head>
         <title>werkzeugkasten 2.0</title>
+
+        <script src="./public/assets/angular-1.7.9/angular.min.js"></script>
+
         <script src="./public/assets/script.js"></script>
         <link rel="stylesheet" type="text/css" href="./public/assets/style.css">
     </head>
-    <body>
-		<div id="el">
-			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="174" height="200" viewbox="0 0 173.20508075688772 200" style="filter: drop-shadow(rgba(255, 255, 255, 0.5) 0px 0px 10px);"><path fill="#fff" d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"></path></svg>
-    </div>
-    
-    <div class="window" id="abbr_search">
-      <div class="line">
-        <span class="title">//abbrevation search</span>
+    <body ng-app="werkzeugkasten">
+      <div id="el">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="174" height="200" viewbox="0 0 173.20508075688772 200" style="filter: drop-shadow(rgba(255, 255, 255, 0.5) 0px 0px 10px);"><path fill="#fff" d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"></path></svg>
       </div>
-      <div class="line">
-        <input type="text" id="abbr" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-      </div>
-      <div class="line free" style="display: none;">
-        <table id="abbr_result">
+      
+      <div id="page_container">
 
-        </table>
-      </div>
-    </div>
+        <div id="program" ng-controller="programCtrl">
 
-    <div class="window" id="clock">
-      <div class="line">
-        <span class="title">//clock</span>
+          <div class="left">
+            <span style="color: #75AE46; font-size: 32px;">//ABBREVIATION</span><br>
+            <span id="input" style="color: #fff; font-size: 24px;" ng-bind="search"></span><br>
+
+          </div>
+
+          <div class="right">
+            <table style="width: 100%;">
+              <thead>
+                <tr>
+                  <td>abbreviation</td>
+                  <td>meaning</td>
+                  <td>category</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="x in result">
+                  <td>{{ x.abbreviation }}</td>
+                  <td>{{ x.meaning }}</td>
+                  <td>{{ x.category }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table style="width: 100%;">
+              <tr>
+                <td>exact match</td>
+                <td>particular match</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+
+        <div id="keyboard" ng-controller="keyboard">
+        
+          <div class="keyboard-line" ng-repeat="x in keys">
+            <div class="key" ng-class="'x' + y.length " ng-repeat="y in x" ng-click="click(y.value)">{{ y.value }}</div>
+          </div>
+
+        </div>
+
       </div>
-    </div>
+
     </body>
 </html>
